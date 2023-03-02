@@ -10,7 +10,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/data", (req, res) => {
-  client.query("SELECT * FROM profiles", (error, results) => {
+  client.query("SELECT * FROM public.profiles", (error, results) => {
     if (error) {
       throw error;
     }
