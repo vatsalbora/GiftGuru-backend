@@ -1,5 +1,5 @@
 import express from "express";
-import client from "../db.js";
+import client from "./db.js";
 
 const PORT = process.env.PORT || 3001;
 

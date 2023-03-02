@@ -1,10 +1,8 @@
-// import pg from "pg";
-// const { Client } = require(pg);
 import pg from "pg";
 const { Client } = pg;
 const client = new Client({
   connectionString:
-    "postgres://cxefyfoslgpefq:444f0af55f8db9a704c458efa99e88becf5b6faa2e9bc67548fe4b2b2c47480b@ec2-3-217-251-77.compute-1.amazonaws.com:5432/d7hm6ddur2pgn",
+    "postgres://yvkmdeopnjwoqo:c051cfcccd1c290f251785d6aef2d9069abbf8b8edeb34add361043fbbaae827@ec2-52-54-212-232.compute-1.amazonaws.com:5432/d3bhdcrs7e1dga",
   ssl: { rejectUnauthorized: false },
 });
 
