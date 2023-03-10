@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import client from "./db.js";
+import pool from "./db.js";
 
 dotenv.config();
 // const PORT = process.env.PORT || 3001;
@@ -13,7 +13,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/data", (req, res) => {
-  client.query("SELECT * FROM public.profiles", (error, results) => {
+  pool.query("SELECT * FROM profiles", (error, results) => {
     if (error) {
       throw error;
     }
