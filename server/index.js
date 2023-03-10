@@ -3,10 +3,10 @@ import dotenv from "dotenv";
 import pool from "./db.js";
 
 dotenv.config();
-// const PORT = process.env.PORT || 3001;
 const PORT = 3001;
 
 const app = express();
+app.use(express.json());
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from Express!" });
@@ -18,6 +18,22 @@ app.get("/data", (req, res) => {
       throw error;
     }
     res.json(results.rows);
+  });
+});
+
+app.get("/get_profiles", (req, res) => {
+  pool.query("SELECT DISTINCT name, state, email FROM profiles WHERE email=$1 limit 5;", [req.query.username]).then(data => {
+      res.json(data["rows"]);
+  });
+});
+
+app.put("/get_profiles", (req, res) => {
+
+  pool.query("INSERT INTO public.\"profiles\" (name, state, email) VALUES ($1, $2, $3);", [req.body.name, req.body.state, req.body.email], (error) => {
+    if (error) {
+      throw error;
+    }
+    res.json({});
   });
 });
 
