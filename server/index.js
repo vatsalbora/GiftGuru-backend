@@ -22,19 +22,26 @@ app.get("/data", (req, res) => {
 });
 
 app.get("/get_profiles", (req, res) => {
-  pool.query("SELECT DISTINCT name, state, email FROM profiles WHERE email=$1 limit 5;", [req.query.username]).then(data => {
-      res.json(data["rows"]);
-  });
+  try {
+    pool.query("SELECT DISTINCT name, state, email FROM profiles WHERE email=$1 limit 5;", [req.query.username]).then(data => {
+        res.json(data["rows"]);
+    });
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.put("/get_profiles", (req, res) => {
-
+  try {
   pool.query("INSERT INTO public.\"profiles\" (name, state, email) VALUES ($1, $2, $3);", [req.body.name, req.body.state, req.body.email], (error) => {
     if (error) {
       throw error;
     }
     res.json({});
   });
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.listen(PORT, () => {
